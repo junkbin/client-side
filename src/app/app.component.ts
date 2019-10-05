@@ -6,8 +6,9 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit { 
+export class AppComponent implements OnInit {
   title = 'client-side';
+  public product = {};
   public list = [];
 
   public constructor(private http: HttpClient) { }
@@ -38,7 +39,12 @@ export class AppComponent implements OnInit {
   }
 
   /** Call API HERE FOR SERVER SIDE */
-  public addProduct() {
-    console.log('add.product.');
+  public async addProduct() {
+    console.log('add.product.', this.product);
+
+    const postUrl = 'http://localhost:3000/';
+    const postBody = this.product;
+
+    await this.http.post(postUrl, postBody).toPromise();
   }
 }
