@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'client-side';
+  public list = [{
+    productId: '1',
+    productName: 'VIVO',
+    categoryId: 'V10',
+    categoryName: 'Mobile',
+  }, {
+    productId: '1',
+    productName: 'VIVO',
+    categoryId: 'V10',
+    categoryName: 'Mobile'
+  }];
 }
