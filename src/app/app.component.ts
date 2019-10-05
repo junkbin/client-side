@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit {
   title = 'client-side';
   public product = {};
-  public list = [];
+  public list: any = [];
 
   public constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
 
     // this is hardcoded.
-    this.list = [{
+    /*this.list = [{
       productId: '1',
       productName: 'VIVO',
       categoryId: 'V10',
@@ -27,15 +27,18 @@ export class AppComponent implements OnInit {
       productName: 'VIVO',
       categoryId: 'V10',
       categoryName: 'Mobile'
-    }];
+    }];*/
 
     this.listProduct();
   }
 
 
   /** CALL API TO LIST THE PRODCUT */
-  public listProduct() {
+  public async listProduct() {
+    const getUrl = 'http://localhost:3000/';
 
+    const list =  await this.http.get(getUrl).toPromise();
+    this.list = list;
   }
 
   /** Call API HERE FOR SERVER SIDE */
@@ -46,5 +49,9 @@ export class AppComponent implements OnInit {
     const postBody = this.product;
 
     await this.http.post(postUrl, postBody).toPromise();
+
+    this.product = {};
+
+    this.listProduct();
   }
 }
